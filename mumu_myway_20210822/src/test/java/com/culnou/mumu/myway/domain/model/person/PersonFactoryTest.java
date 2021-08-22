@@ -17,6 +17,37 @@ public class PersonFactoryTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	//id NULLチェックのテスト
+	@Test(expected = IllegalArgumentException.class)
+	public void createPersonByIdNullTest() {
+		User user = new User(null, "user1");
+        Person person = PersonFactory.creatPerson(user);
+        assertNotNull(person);
+        assertEquals(person.personId().id(), user.id());
+        assertEquals(person.name(), user.name());
+	}
+	//name NULLチェックのテスト
+	@Test(expected = IllegalArgumentException.class)
+	public void createPersonByNameNullTest() {
+		UUID uuid = UUID.randomUUID();
+        String str = uuid.toString();
+        User user = new User(str, null);
+        Person person = PersonFactory.creatPerson(user);
+        assertNotNull(person);
+        assertEquals(person.personId().id(), user.id());
+        assertEquals(person.name(), user.name());
+	}
+	//NULLチェックのテスト
+	@Test(expected = IllegalArgumentException.class)
+	public void createPersonByNullTest() {
+        User user = new User(null, null);
+        Person person = PersonFactory.creatPerson(user);
+        assertNotNull(person);
+        assertEquals(person.personId().id(), user.id());
+        assertEquals(person.name(), user.name());
+	}
+		
 
 	@Test
 	public void createPersonTest() {
