@@ -6,8 +6,7 @@ import lombok.Data;
 @Data
 public class UserDto implements Dto {
 	
-    String id;
-	
+    String id;	
 	String name;
 	
 	public UserDto(String id, String name) {

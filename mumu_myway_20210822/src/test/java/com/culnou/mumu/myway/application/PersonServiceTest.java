@@ -35,7 +35,7 @@ public class PersonServiceTest {
 	public void testAssignPerson() throws Exception{
 		UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
-		UserDto userDto = new UserDto(str, "personTest001");
+        UserDto userDto = new UserDto(str, "personTest001");
 		personService.assignPerson(userDto);
 		PersonDto personDto = (PersonDto)personService.findPersonById(str);
 		assertNotNull(personDto);

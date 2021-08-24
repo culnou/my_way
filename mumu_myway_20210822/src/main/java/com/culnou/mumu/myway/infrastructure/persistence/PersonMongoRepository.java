@@ -1,7 +1,7 @@
 package com.culnou.mumu.myway.infrastructure.persistence;
 
-import java.util.Optional;
-import java.util.UUID;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.culnou.mumu.myway.domain.model.person.Person;
-import com.culnou.mumu.myway.domain.model.person.PersonId;
+
 import com.culnou.mumu.myway.domain.model.person.PersonRepository;
 @Service("personMongoRepository")
 @Transactional
@@ -18,26 +18,8 @@ public class PersonMongoRepository implements PersonRepository {
 	@Autowired
 	private PersonMongoDataRepository personRepository;
 	
-	@Override
-	public PersonId nextIdentity() throws Exception {
-		// TODO Auto-generated method stub
-		UUID uuid = UUID.randomUUID();
-        String str = uuid.toString();
-        
-		return new PersonId(str);
-	}
 
-	@Override
-	public Person findById(PersonId personId) throws Exception {
-		// TODO Auto-generated method stub
-		Optional<PersonDocument> readDoc = personRepository.findById(personId.id());
-		if (readDoc.isPresent()){
-			PersonDocument doc = readDoc.get();
-			return this.convertPersonDocumentToPerson(doc);
-		}else {
-			return null;
-		}
-	}
+	
 
 	@Override
 	public void save(Person person) throws Exception {
@@ -69,9 +51,6 @@ public class PersonMongoRepository implements PersonRepository {
 		return doc;
 	}
 	
-	private Person convertPersonDocumentToPerson(PersonDocument doc) {
-		return new Person(doc.getPersonId(), doc.getName());
-		
-	}
+	
 
 }

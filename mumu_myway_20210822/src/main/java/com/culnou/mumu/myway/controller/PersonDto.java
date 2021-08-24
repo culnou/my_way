@@ -7,7 +7,6 @@ import lombok.Data;
 public class PersonDto implements Dto {
 	
 	String id;
-	
 	String name;
 	
 	public PersonDto(String id, String name) {

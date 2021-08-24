@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.culnou.mumu.myway.query.model.person.PersonQuery;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +24,9 @@ public class PersonRepositoryTest {
 	@Qualifier("personMongoRepository")
 	@Autowired
 	private PersonRepository personRepository;
+	@Qualifier("personMongoQuery")
+	@Autowired
+	private PersonQuery personQuery;
 		
 
 	@Before
@@ -35,14 +40,13 @@ public class PersonRepositoryTest {
 
 	@Test
 	public void testSaveAndFindOnePerson() throws Exception{
-		//PersonId personId = personRepository.nextIdentity();
-		//Person person = new Person(personId, "sagawa test2");
+	
 		UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
         User user = new User(str, "user1");
         Person person = PersonFactory.creatPerson(user);
 		personRepository.save(person);
-		Person readPerson = personRepository.findById(person.personId());
+		Person readPerson = personQuery.findById(person.personId());
 		assertNotNull(readPerson);
 		assertEquals(readPerson.personId(), person.personId());
 		assertEquals(readPerson.name(), person.name());
