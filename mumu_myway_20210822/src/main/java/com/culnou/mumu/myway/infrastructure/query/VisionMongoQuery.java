@@ -43,35 +43,17 @@ public class VisionMongoQuery implements VisionQuery {
 		return convertVisionQueryDocumentsToVisions(docs);
 	}
 	@Override
-	public List<Vision> findVisionsCauseBy(VisionId cause) throws Exception {
-		List<VisionQueryDocument> docs = visionQuery.findVisionsByCause(cause);
+	public List<Vision> findVisionsCauseOf(VisionId result) throws Exception {
+		List<VisionQueryDocument> docs = visionQuery.findVisionsByResult(result);
 		//検証用
-		System.out.println("******* cause " + docs.get(0).getCause().id());
+		System.out.println("******* cause " + docs.get(0).getResult().id());
 		return convertVisionQueryDocumentsToVisions(docs);
 	}
 	
-	@Override
-	public boolean hasVisionsCauseBy(VisionId cause) throws Exception {
-		// TODO Auto-generated method stub
-		List<VisionQueryDocument> docs = visionQuery.findVisionsByCause(cause);
-		//検証用
-		System.out.println("******* cause " + docs.get(0).getCause().id());
-		if(docs.size() > 0) {
-			return true;
-		}else {
-			return false;
-		}
-		
-	}
+	
 	
 	private Vision convertVisionQueryDocumentToVision(VisionQueryDocument doc) {
 		Vision vision = new Vision(doc.getPersonId(), doc.getVisionId(), doc.getVisionType(), doc.getContent());
-		if(doc.getCause() != null) {
-			vision.setCause(doc.getCause());
-		}
-		if(doc.getStrategy() != null) {
-			vision.setStrategy(doc.getStrategy());
-		}
 		return vision;
 		
 	}

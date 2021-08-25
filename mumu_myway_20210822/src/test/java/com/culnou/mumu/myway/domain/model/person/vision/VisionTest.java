@@ -56,29 +56,9 @@ public class VisionTest {
 		vision.content();
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetNullCause() {
-		PersonId personId = new PersonId("111");
-		VisionId visionId = new VisionId("111");
-		VisionType visionType = VisionType.BUSINESS;
-		String content = "111";
-		Vision vision = new Vision(personId, visionId, visionType, content);
-		vision.setCause(null);
-		//実行されない。
-		vision.content();
-	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetNullStrategy() {
-		PersonId personId = new PersonId("111");
-		VisionId visionId = new VisionId("111");
-		VisionType visionType = VisionType.BUSINESS;
-		String content = "111";
-		Vision vision = new Vision(personId, visionId, visionType, content);
-		vision.setStrategy(null);
-		//実行されない。
-		vision.content();
-	}
+	
+	
 	
 	//識別子オブジェクトが正しく設定される
 	@Test
@@ -101,29 +81,6 @@ public class VisionTest {
 		assertEquals(vision.visionId(), visionId);
 	}
 	
-	@Test
-	public void testCause() {
-		PersonId personId = new PersonId("111");
-		VisionId visionId = new VisionId("111");
-		VisionType visionType = VisionType.BUSINESS;
-		String content = "111";
-		Vision vision = new Vision(personId, visionId, visionType, content);
-		VisionId cause = new VisionId("111");
-		vision.setCause(cause);
-		assertEquals(vision.cause(), cause);
-	}
-	
-	@Test
-	public void testStrategy() {
-		PersonId personId = new PersonId("111");
-		VisionId visionId = new VisionId("111");
-		VisionType visionType = VisionType.BUSINESS;
-		String content = "111";
-		Vision vision = new Vision(personId, visionId, visionType, content);
-		Strategy strategy = new Strategy("111", "111");
-		vision.setStrategy(strategy);
-		assertEquals(vision.strategy(), strategy);
-	}
 	
 	//列挙型が正しく設定される
 	@Test

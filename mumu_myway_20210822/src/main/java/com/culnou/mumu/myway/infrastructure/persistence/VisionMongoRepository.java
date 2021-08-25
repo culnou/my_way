@@ -57,8 +57,6 @@ public class VisionMongoRepository implements VisionRepository {
 		doc.setVisionId(vision.visionId());
 		doc.setVisionType(vision.visionType());
 		doc.setContent(vision.content());
-		doc.setCause(vision.cause());
-		doc.setStrategy(vision.strategy());
 		return doc;
 	}
 	

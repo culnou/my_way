@@ -8,8 +8,6 @@ public class Vision {
 	private VisionId visionId;
 	private VisionType visionType;
 	private String content;
-	private VisionId cause;
-	private Strategy strategy;
 	
 	public Vision(PersonId personId, VisionId visionId, VisionType visionType, String content) {
 		this.setPersonId(personId);
@@ -62,26 +60,4 @@ public class Vision {
 		return this.content;
 	}
 	
-	public void setCause(VisionId visionId) {
-		if(visionId == null) {
-			throw new IllegalArgumentException("The visionId may not be set to null.");
-		}
-		this.cause = visionId;
-	}
-	
-	public VisionId cause() {
-		return this.cause;
-	}
-	
-	public void setStrategy(Strategy strategy) {
-		if(strategy == null) {
-			throw new IllegalArgumentException("The strategy may not be set to null.");
-		}
-		this.strategy = strategy;
-	}
-	
-	public Strategy strategy() {
-		return this.strategy;
-	}
-
 }

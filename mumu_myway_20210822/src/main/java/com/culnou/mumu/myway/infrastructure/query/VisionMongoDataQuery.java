@@ -17,7 +17,7 @@ public interface VisionMongoDataQuery extends MongoRepository<VisionQueryDocumen
 	@Query("{ 'personId' : ?0}")
 	List<VisionQueryDocument> findVisionsByPersonId(PersonId personId);
 	
-	@Query("{ 'cause' : ?0}")
-	List<VisionQueryDocument> findVisionsByCause(VisionId cause);
+	@Query("{ 'result' : ?0}")
+	List<VisionQueryDocument> findVisionsByResult(VisionId cause);
 	
 }

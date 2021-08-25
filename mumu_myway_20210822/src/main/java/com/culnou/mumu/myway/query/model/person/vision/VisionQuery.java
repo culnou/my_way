@@ -14,9 +14,7 @@ public interface VisionQuery {
 	
 	public List<Vision> findVisionsOfPerson(PersonId personId) throws Exception;
 	
-	public List<Vision> findVisionsCauseBy(VisionId cause) throws Exception;
-	
-	public boolean hasVisionsCauseBy(VisionId cause) throws Exception;
+	public List<Vision> findVisionsCauseOf(VisionId cause) throws Exception;
 	
 	public List<Vision> findVisionsByVisionType(String type) throws Exception;
 
