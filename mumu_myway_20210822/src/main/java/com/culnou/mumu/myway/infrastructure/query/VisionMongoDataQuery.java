@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
-import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
+
 
 public interface VisionMongoDataQuery extends MongoRepository<VisionQueryDocument, String> {
 
@@ -17,7 +17,6 @@ public interface VisionMongoDataQuery extends MongoRepository<VisionQueryDocumen
 	@Query("{ 'personId' : ?0}")
 	List<VisionQueryDocument> findVisionsByPersonId(PersonId personId);
 	
-	@Query("{ 'result' : ?0}")
-	List<VisionQueryDocument> findVisionsByResult(VisionId cause);
+	
 	
 }

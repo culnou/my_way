@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.Experiment;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ExperimentId;
 
 public class VisionTest {
 
@@ -57,9 +59,6 @@ public class VisionTest {
 	}
 	
 	
-	
-	
-	
 	//識別子オブジェクトが正しく設定される
 	@Test
 	public void testPersonId() {
@@ -91,6 +90,68 @@ public class VisionTest {
 		String content = "111";
 		Vision vision = new Vision(personId, visionId, visionType, content);
 		assertEquals(vision.visionType(), VisionType.BUSINESS);
+	}
+	
+	//ファクトリーメソッドのテスト
+	@Test
+	public void testLaunchExperiment() {
+		PersonId personId = new PersonId("111");
+		VisionId visionId = new VisionId("111");
+		VisionType visionType = VisionType.BUSINESS;
+		String content = "111";
+		Vision vision = new Vision(personId, visionId, visionType, content);
+		ExperimentId experimentId = new ExperimentId("111");
+		String name = "111";
+		String description = "111";
+		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		assertEquals(experiment.personId(), personId);
+		assertEquals(experiment.visionId(), visionId);
+		assertEquals(experiment.experimentId(), experimentId);
+		assertEquals(experiment.name(), name);
+		assertEquals(experiment.description(), description);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testLaunchExperimentByNoExperimentId() {
+		PersonId personId = new PersonId("111");
+		VisionId visionId = new VisionId("111");
+		VisionType visionType = VisionType.BUSINESS;
+		String content = "111";
+		Vision vision = new Vision(personId, visionId, visionType, content);
+		ExperimentId experimentId = null;
+		String name = "111";
+		String description = "111";
+		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		//実行されない。
+		experiment.name();
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testLaunchExperimentByName() {
+		PersonId personId = new PersonId("111");
+		VisionId visionId = new VisionId("111");
+		VisionType visionType = VisionType.BUSINESS;
+		String content = "111";
+		Vision vision = new Vision(personId, visionId, visionType, content);
+		ExperimentId experimentId = new ExperimentId("111");
+		String name = null;
+		String description = "111";
+		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		//実行されない。
+		experiment.name();
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testLaunchExperimentByDescription() {
+		PersonId personId = new PersonId("111");
+		VisionId visionId = new VisionId("111");
+		VisionType visionType = VisionType.BUSINESS;
+		String content = "111";
+		Vision vision = new Vision(personId, visionId, visionType, content);
+		ExperimentId experimentId = new ExperimentId("111");
+		String name = "111";
+		String description = null;
+		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		//実行されない。
+		experiment.name();
 	}
 
 }

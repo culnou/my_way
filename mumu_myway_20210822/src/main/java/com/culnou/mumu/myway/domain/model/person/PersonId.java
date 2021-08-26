@@ -51,7 +51,7 @@ public class PersonId implements Serializable, Cloneable{
 		if(object != null && this.getClass() == object.getClass()) {
 			PersonId personId = (PersonId)object;
 			//必ず参照の比較（＝＝）ではなく内容の比較（equals）を行う。
-			if(personId.id.equals(this.id)){
+			if(personId.id().equals(this.id())){
 				equality = true;
 			}
 		}

@@ -42,13 +42,7 @@ public class VisionMongoQuery implements VisionQuery {
 		List<VisionQueryDocument> docs = visionQuery.findVisionsByVisionType(type);
 		return convertVisionQueryDocumentsToVisions(docs);
 	}
-	@Override
-	public List<Vision> findVisionsCauseOf(VisionId result) throws Exception {
-		List<VisionQueryDocument> docs = visionQuery.findVisionsByResult(result);
-		//検証用
-		System.out.println("******* cause " + docs.get(0).getResult().id());
-		return convertVisionQueryDocumentsToVisions(docs);
-	}
+	
 	
 	
 	
