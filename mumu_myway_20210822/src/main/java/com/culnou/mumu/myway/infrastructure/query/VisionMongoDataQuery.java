@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
+import com.culnou.mumu.myway.domain.model.person.vision.VisionType;
 
 
 public interface VisionMongoDataQuery extends MongoRepository<VisionQueryDocument, String> {
 
 	@Query("{ 'visionType' : ?0 }")
-	List<VisionQueryDocument> findVisionsByVisionType(String type);
+	List<VisionQueryDocument> findVisionsByVisionType(VisionType visionType);
 	
 	
 	@Query("{ 'personId' : ?0}")

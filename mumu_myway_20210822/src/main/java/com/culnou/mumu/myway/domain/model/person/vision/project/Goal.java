@@ -3,7 +3,7 @@ package com.culnou.mumu.myway.domain.model.person.vision.project;
 import java.io.Serializable;
 
 
-public class Measurement implements Serializable, Cloneable{
+public class Goal implements Serializable, Cloneable{
 	
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class Measurement implements Serializable, Cloneable{
 	private String criteria;
 	
 	
-	public Measurement(String indicator, String criteria) {
+	public Goal(String indicator, String criteria) {
 		this.setIndicator(indicator);
 		this.setCriteria(criteria);
 	}
@@ -42,21 +42,21 @@ public class Measurement implements Serializable, Cloneable{
 	}
 	
 	@Override
-	public Measurement clone() {
+	public Goal clone() {
 		try {
 			super.clone();
 		}catch(CloneNotSupportedException e) {
 			throw new InternalError();
 		}
-		return new Measurement(this.indicator(), this.criteria());
+		return new Goal(this.indicator(), this.criteria());
 	}
 	@Override
 	public boolean equals(Object object) {
 		boolean equality = false;
 		if(object != null && this.getClass() == object.getClass()) {
-			Measurement mesurement = (Measurement)object;
+			Goal goal = (Goal)object;
 			//必ず参照の比較（＝＝）ではなく内容の比較（equals）を行う。
-			if(mesurement.indicator().equals(this.indicator()) && mesurement.criteria().equals(this.criteria())){
+			if(goal.indicator().equals(this.indicator()) && goal.criteria().equals(this.criteria())){
 				equality = true;
 			}
 		}

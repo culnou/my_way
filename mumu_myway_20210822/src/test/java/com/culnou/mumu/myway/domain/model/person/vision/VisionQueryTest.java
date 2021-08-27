@@ -38,6 +38,30 @@ public class VisionQueryTest {
 	}
 
 	@Test
+	public void testFindVisionsOfVisionType() throws Exception{
+		
+		String name = "111";
+		PersonId personId = new PersonId("111");
+		Person person = new Person(personId, name);
+		
+		VisionId visionId = visionRepository.nextIdentity();
+		VisionType visionType = VisionType.BUSINESS;
+		String content = "111";
+		
+		Vision vision = person.createVision(visionId, visionType, content);
+		visionRepository.save(vision);
+		
+		VisionId visionId2 = visionRepository.nextIdentity();
+		Vision vision2 = person.createVision(visionId2, visionType, content);
+		visionRepository.save(vision2);
+		
+		
+		List<Vision> visions = visionQuery.findVisionsOfVisionType(VisionType.BUSINESS);
+		assertEquals(visions.size(), 2);
+		assertEquals(visions.get(0).visionType(), VisionType.BUSINESS);
+	}
+	
+	@Test
 	public void testFindVisionsOfPerson() throws Exception{
 		
 		String name = "111";

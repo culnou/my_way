@@ -2,17 +2,17 @@ package com.culnou.mumu.myway.domain.model.person.vision.project;
 
 
 
-public interface ExperimentRepository {
+public interface ProjectRepository {
 	
 	//識別子オブジェクトはリポジトリが生成する。
-	public ExperimentId nextIdentity() throws Exception;
+	public ProjectId nextIdentity() throws Exception;
 		
 		
 	//コマンド。
-	public void save(Experiment experiment) throws Exception;
+	public void save(Project project) throws Exception;
 			
 	//コマンド。
-	public void remove(Experiment experiment) throws Exception;
+	public void remove(Project project) throws Exception;
 			
 	//コマンド。
 	public void removeAll() throws Exception;

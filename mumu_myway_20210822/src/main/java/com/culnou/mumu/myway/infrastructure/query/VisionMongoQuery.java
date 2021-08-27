@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.culnou.mumu.myway.domain.model.person.PersonId;
 import com.culnou.mumu.myway.domain.model.person.vision.Vision;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
+import com.culnou.mumu.myway.domain.model.person.vision.VisionType;
 import com.culnou.mumu.myway.query.model.person.vision.VisionQuery;
 @Service("visionMongoQuery")
 @Transactional
@@ -38,8 +39,10 @@ public class VisionMongoQuery implements VisionQuery {
 		return convertVisionQueryDocumentsToVisions(docs);
 	}
 	@Override
-	public List<Vision> findVisionsByVisionType(String type) throws Exception{
-		List<VisionQueryDocument> docs = visionQuery.findVisionsByVisionType(type);
+	public List<Vision> findVisionsOfVisionType(VisionType visionType) throws Exception{
+		List<VisionQueryDocument> docs = visionQuery.findVisionsByVisionType(visionType);
+		//検証用
+		System.out.println("******* visionType " + docs.get(0).getVisionType());
 		return convertVisionQueryDocumentsToVisions(docs);
 	}
 	

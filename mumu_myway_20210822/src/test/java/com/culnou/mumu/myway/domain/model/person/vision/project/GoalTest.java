@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MeasurementTest {
+public class GoalTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -20,7 +20,7 @@ public class MeasurementTest {
 	public void testSetIndicator() {
 		String indicator = null;
 		String criteria = "111";
-		Measurement mesurement = new Measurement(indicator, criteria);
+		Goal mesurement = new Goal(indicator, criteria);
 		//実行されない。
 		mesurement.indicator();
 	}
@@ -28,15 +28,15 @@ public class MeasurementTest {
 	public void testSetCriteria() {
 		String indicator = "111";
 		String criteria = null;
-		Measurement mesurement = new Measurement(indicator, criteria);
+		Goal mesurement = new Goal(indicator, criteria);
 		//実行されない。
 		mesurement.indicator();
 	}
 	@Test
 	public void testInvariant() {
 		//自身とクローンの等価性検証。
-		Measurement measurement = new Measurement("111", "111");
-		Measurement clone = measurement.clone();
+		Goal measurement = new Goal("111", "111");
+		Goal clone = measurement.clone();
 		assertEquals(measurement, clone);
 		//副作用のないメソッドの実行
 		System.out.println(measurement.indicator());
@@ -45,15 +45,15 @@ public class MeasurementTest {
 	}
 	@Test
 	public void testEquality() {
-		Measurement mesurement1 = new Measurement("111", "111");
-		Measurement mesurement2 = new Measurement("111", "111");
+		Goal mesurement1 = new Goal("111", "111");
+		Goal mesurement2 = new Goal("111", "111");
 		assertEquals(mesurement1, mesurement2);
 	}
 	@Test
 	public void testExchangeability() {
-		Measurement mesurement1 = new Measurement("111", "111");
-		Measurement mesurement2 = new Measurement("222", "222");
-		Measurement mesurement3 = new Measurement("222", "222");
+		Goal mesurement1 = new Goal("111", "111");
+		Goal mesurement2 = new Goal("222", "222");
+		Goal mesurement3 = new Goal("222", "222");
 		assertNotEquals(mesurement1, mesurement3);
 		mesurement1 = mesurement2;
 		assertEquals(mesurement1, mesurement3);

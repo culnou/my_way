@@ -5,6 +5,7 @@ import java.util.List;
 import com.culnou.mumu.myway.domain.model.person.PersonId;
 import com.culnou.mumu.myway.domain.model.person.vision.Vision;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
+import com.culnou.mumu.myway.domain.model.person.vision.VisionType;
 
 public interface VisionQuery {
 	
@@ -13,6 +14,6 @@ public interface VisionQuery {
 	
 	public List<Vision> findVisionsOfPerson(PersonId personId) throws Exception;
 	
-	public List<Vision> findVisionsByVisionType(String type) throws Exception;
+	public List<Vision> findVisionsOfVisionType(VisionType visionType) throws Exception;
 
 }

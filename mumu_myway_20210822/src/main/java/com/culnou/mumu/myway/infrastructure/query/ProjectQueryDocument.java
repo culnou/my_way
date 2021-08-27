@@ -4,21 +4,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
-import com.culnou.mumu.myway.domain.model.person.vision.project.ExperimentId;
-import com.culnou.mumu.myway.domain.model.person.vision.project.Measurement;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectType;
+import com.culnou.mumu.myway.domain.model.person.vision.project.Goal;
 
 
 import lombok.Data;
 
-@Document(collection = "experiments")
+@Document(collection = "projects")
 @Data
-public class ExperimentQueryDocument {
+public class ProjectQueryDocument {
 	private String id;
 	private PersonId personId;
 	private VisionId visionId;
-	private ExperimentId experimentId;
+	private ProjectId projectId;
 	private String name;
 	private String description;
-	private Measurement mesurement;
+	private ProjectType projectType;
+	private Goal goal;
 
 }

@@ -7,8 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
-import com.culnou.mumu.myway.domain.model.person.vision.project.Experiment;
-import com.culnou.mumu.myway.domain.model.person.vision.project.ExperimentId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.Project;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectType;
 
 public class VisionTest {
 
@@ -100,15 +101,16 @@ public class VisionTest {
 		VisionType visionType = VisionType.BUSINESS;
 		String content = "111";
 		Vision vision = new Vision(personId, visionId, visionType, content);
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = vision.launchExperiment(experimentId, name, description);
-		assertEquals(experiment.personId(), personId);
-		assertEquals(experiment.visionId(), visionId);
-		assertEquals(experiment.experimentId(), experimentId);
-		assertEquals(experiment.name(), name);
-		assertEquals(experiment.description(), description);
+		Project project = vision.launchProject(experimentId, name, description, ProjectType.EXPERIMENT);
+		assertEquals(project.personId(), personId);
+		assertEquals(project.visionId(), visionId);
+		assertEquals(project.projectId(), experimentId);
+		assertEquals(project.name(), name);
+		assertEquals(project.projectType(), ProjectType.EXPERIMENT);
+		assertEquals(project.description(), description);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -118,10 +120,10 @@ public class VisionTest {
 		VisionType visionType = VisionType.BUSINESS;
 		String content = "111";
 		Vision vision = new Vision(personId, visionId, visionType, content);
-		ExperimentId experimentId = null;
+		ProjectId experimentId = null;
 		String name = "111";
 		String description = "111";
-		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		Project experiment = vision.launchProject(experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
@@ -132,10 +134,10 @@ public class VisionTest {
 		VisionType visionType = VisionType.BUSINESS;
 		String content = "111";
 		Vision vision = new Vision(personId, visionId, visionType, content);
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = null;
 		String description = "111";
-		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		Project experiment = vision.launchProject(experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
@@ -146,10 +148,10 @@ public class VisionTest {
 		VisionType visionType = VisionType.BUSINESS;
 		String content = "111";
 		Vision vision = new Vision(personId, visionId, visionType, content);
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = null;
-		Experiment experiment = vision.launchExperiment(experimentId, name, description);
+		Project experiment = vision.launchProject(experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}

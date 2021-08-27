@@ -2,8 +2,6 @@ package com.culnou.mumu.myway.domain.model.person.vision.project;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,35 +17,37 @@ import com.culnou.mumu.myway.domain.model.person.vision.Vision;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionRepository;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionType;
-import com.culnou.mumu.myway.query.model.person.vision.project.ExperimentQuery;
+
+import com.culnou.mumu.myway.query.model.person.vision.project.ProjectQuery;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ExperimentQueryTest {
+public class ProjectRepositoryTest {
 	
-	@Qualifier("experimentMongoRepository")
+	@Qualifier("projectMongoRepository")
 	@Autowired
-	private ExperimentRepository experimentRepository;
+	private ProjectRepository projectRepository;
 	
-	@Qualifier("experimentMongoQuery")
+	@Qualifier("projectMongoQuery")
 	@Autowired
-	private ExperimentQuery experimentQuery;
-	
+	private ProjectQuery projectQuery;
+
 	@Qualifier("visionMongoRepository")
 	@Autowired
 	private VisionRepository visionRepository;
-
+	
 	@Before
 	public void setUp() throws Exception {
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		experimentRepository.removeAll();
+		//projectRepository.removeAll();
 	}
 
 	@Test
-	public void testFindExperimentsOfVision() throws Exception{
-		
+	public void testSaveAndFindOneproject() throws Exception{
 		String name = "111";
 		PersonId personId = new PersonId("111");
 		Person person = new Person(personId, name);
@@ -58,16 +58,20 @@ public class ExperimentQueryTest {
 		
 		Vision vision = person.createVision(visionId, visionType, content);
 		
-		ExperimentId experimentId = new ExperimentId("111");
-		String experimentName = "111";
+		ProjectId projectId = new ProjectId("111");
+		String projectName = "111";
 		String description = "111";
-		Experiment experiment = vision.launchExperiment(experimentId, experimentName, description);
-		Measurement measurement = new Measurement("111", "111");
-		experiment.defineMeasurement(measurement);
-		experimentRepository.save(experiment);
-		List<Experiment> experiments = experimentQuery.findExperimentsOfVision(visionId);
-		assertEquals(experiments.get(0).measurement(), measurement);
-		assertEquals(experiments.get(0).visionId(), visionId);
+		Project project = vision.launchProject(projectId, projectName, description, ProjectType.EXPERIMENT);
+		
+		projectRepository.save(project);
+		Project readproject = projectQuery.findById(projectId);
+		assertEquals(readproject.personId(), personId);
+		assertEquals(readproject.visionId(), visionId);
+		assertEquals(readproject.projectId(), projectId);
+		assertEquals(readproject.name(), projectName);
+		assertEquals(readproject.description(), description);
+		assertEquals(readproject.projectType(), ProjectType.EXPERIMENT);
+		
 	}
 
 }

@@ -1,8 +1,9 @@
 package com.culnou.mumu.myway.domain.model.person.vision;
 
 import com.culnou.mumu.myway.domain.model.person.PersonId;
-import com.culnou.mumu.myway.domain.model.person.vision.project.Experiment;
-import com.culnou.mumu.myway.domain.model.person.vision.project.ExperimentId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.Project;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectId;
+import com.culnou.mumu.myway.domain.model.person.vision.project.ProjectType;
 
 public class Vision {
 	
@@ -63,7 +64,7 @@ public class Vision {
 	}
 	
 	//ファクトリーメソッド
-	public Experiment launchExperiment(ExperimentId experimentId, String name, String description) {
+	public Project launchProject(ProjectId experimentId, String name, String description, ProjectType projectType) {
 		if(experimentId == null) {
 			throw new IllegalArgumentException("The experimentId may not be set to null.");
 		}
@@ -73,7 +74,10 @@ public class Vision {
 		if(description == null) {
 			throw new IllegalArgumentException("The description may not be set to null.");
 		}
-		return new Experiment(this.personId(), this.visionId(), experimentId, name, description);
+		if(projectType == null) {
+			throw new IllegalArgumentException("The projectType may not be set to null.");
+		}
+		return new Project(this.personId(), this.visionId(), experimentId, name, description, projectType);
 	}
 	
 }

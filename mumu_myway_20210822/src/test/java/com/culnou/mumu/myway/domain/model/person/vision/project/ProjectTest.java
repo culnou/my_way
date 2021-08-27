@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.culnou.mumu.myway.domain.model.person.PersonId;
 import com.culnou.mumu.myway.domain.model.person.vision.VisionId;
 
-public class ExperimentTest {
+public class ProjectTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -24,22 +24,22 @@ public class ExperimentTest {
 	public void testInitializeByNoPersonId() {
 		PersonId personId = null;
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId projectId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project project = new Project(personId, visionId, projectId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
-		experiment.name();
+		project.name();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInitializeByNoVisionId() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = null;
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
@@ -48,10 +48,10 @@ public class ExperimentTest {
 	public void testInitializeByNoExperimentId() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = null;
+		ProjectId experimentId = null;
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
@@ -60,10 +60,10 @@ public class ExperimentTest {
 	public void testInitializeByNoName() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = null;
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
@@ -72,23 +72,35 @@ public class ExperimentTest {
 	public void testInitializeByNoDescription() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = null;
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		//実行されない。
 		experiment.name();
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInitializeByNegativeExpendedTime() {
+		PersonId personId = new PersonId("111");
+		VisionId visionId = new VisionId("111");
+		ProjectId projectId = new ProjectId("111");
+		String name = "111";
+		String description = "111";
+		Project project = new Project(personId, visionId, projectId, name, description, ProjectType.EXPERIMENT);
+		project.setExpendedTime(-1);
+		//実行されない。
+	    project.name();
+	}
 	//識別子オブジェクトが正しく設定される
 	@Test
 	public void testPersonId() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		assertEquals(experiment.personId(), personId);
 	}
 	
@@ -96,10 +108,10 @@ public class ExperimentTest {
 	public void testVisionId() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		assertEquals(experiment.visionId(), visionId);
 	}
 	
@@ -107,21 +119,21 @@ public class ExperimentTest {
 	public void testExperimentId() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
-		assertEquals(experiment.experimentId(), experimentId);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
+		assertEquals(experiment.projectId(), experimentId);
 	}
 	
 	@Test
 	public void testName() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		assertEquals(experiment.name(), name);
 	}
 	
@@ -129,10 +141,10 @@ public class ExperimentTest {
 	public void testDescription() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
 		assertEquals(experiment.description(), description);
 	}
 	
@@ -141,28 +153,28 @@ public class ExperimentTest {
 	public void testDefineMeasurement() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
-		Measurement measurement = new Measurement("111", "111");
-		experiment.defineMeasurement(measurement);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
+		Goal measurement = new Goal("111", "111");
+		experiment.defineGoal(measurement);
 		//測定は値オブジェクトなので等価。
-		assertEquals(experiment.measurement(), measurement);
+		assertEquals(experiment.goal(), measurement);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefineNoMeasurement() {
 		PersonId personId = new PersonId("111");
 		VisionId visionId = new VisionId("111");
-		ExperimentId experimentId = new ExperimentId("111");
+		ProjectId experimentId = new ProjectId("111");
 		String name = "111";
 		String description = "111";
-		Experiment experiment = new Experiment(personId, visionId, experimentId, name, description);
-		Measurement measurement = null;
-		experiment.defineMeasurement(measurement);
+		Project experiment = new Project(personId, visionId, experimentId, name, description, ProjectType.EXPERIMENT);
+		Goal measurement = null;
+		experiment.defineGoal(measurement);
 		//実行されない。
-		experiment.measurement();
+		experiment.goal();
 	}
 
 }

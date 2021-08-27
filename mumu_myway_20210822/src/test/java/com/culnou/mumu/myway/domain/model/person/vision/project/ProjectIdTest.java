@@ -8,7 +8,7 @@ import org.junit.Test;
 
 
 
-public class ExperimentIdTest {
+public class ProjectIdTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -22,34 +22,34 @@ public class ExperimentIdTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetId() {
 		String id = null;
-		ExperimentId experimentId = new ExperimentId(id);
+		ProjectId projectId = new ProjectId(id);
 		//実行されない。
-		experimentId.id();
+		projectId.id();
 	}
 	
 	//値オブジェクトの不変性のテスト。
 	@Test
 	public void testInvariant() {
 		//自身とクローンの等価性検証。
-		ExperimentId experimentId = new ExperimentId("111");
-		ExperimentId clone = experimentId.clone();
-		assertEquals(experimentId, clone);
+		ProjectId projectId = new ProjectId("111");
+		ProjectId clone = projectId.clone();
+		assertEquals(projectId, clone);
 		//副作用のないメソッドの実行
-		System.out.println(experimentId.id());
+		System.out.println(projectId.id());
 		//メソッドを実行することによって自身の状態が変化していないか検証。
-		assertEquals(experimentId, clone);
+		assertEquals(projectId, clone);
 	}
 	@Test
 	public void testEquality() {
-		ExperimentId id1 = new ExperimentId("111");
-		ExperimentId id2 = new ExperimentId("111");
+		ProjectId id1 = new ProjectId("111");
+		ProjectId id2 = new ProjectId("111");
 		assertEquals(id1, id2);
 	}
 	@Test
 	public void testExchangeability() {
-		ExperimentId id1 = new ExperimentId("111");
-		ExperimentId id2 = new ExperimentId("222");
-		ExperimentId id3 = new ExperimentId("222");
+		ProjectId id1 = new ProjectId("111");
+		ProjectId id2 = new ProjectId("222");
+		ProjectId id3 = new ProjectId("222");
 		assertNotEquals(id1, id3);
 		//id1をid2に置き換える。
 		id1 = id2;

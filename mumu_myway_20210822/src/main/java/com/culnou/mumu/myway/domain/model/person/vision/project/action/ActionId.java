@@ -1,10 +1,9 @@
-package com.culnou.mumu.myway.domain.model.person.vision.project;
+package com.culnou.mumu.myway.domain.model.person.vision.project.action;
 
 import java.io.Serializable;
 
 
-
-public class ExperimentId implements Serializable, Cloneable{
+public class ActionId implements Serializable, Cloneable{
 
 	/**
 	 * 
@@ -13,12 +12,11 @@ public class ExperimentId implements Serializable, Cloneable{
 	
 	private String id;
 	
-	public ExperimentId(String id) {
-	    setId(id);	
+	public ActionId(String id) {
+		this.setId(id);
 	}
 	
 	protected void setId(String id) {
-		//セッターで一貫性制約を保持する。
 		if(id == null) {
 			throw new IllegalArgumentException("The id may not be set to null.");
 		}
@@ -30,26 +28,26 @@ public class ExperimentId implements Serializable, Cloneable{
 	}
 	
 	@Override
-	public ExperimentId clone() {
+	public ActionId clone() {
 		try {
 			super.clone();
 		}catch(CloneNotSupportedException e) {
 			throw new InternalError();
 		}
-		return new ExperimentId(this.id());
-	}
+		return new ActionId(this.id());
+	}	
 	
 	@Override
 	public boolean equals(Object object) {
 		boolean equality = false;
 		if(object != null && this.getClass() == object.getClass()) {
-			ExperimentId experimentId = (ExperimentId)object;
+			ActionId actionId = (ActionId)object;
 			//必ず参照の比較（＝＝）ではなく内容の比較（equals）を行う。
-			if(experimentId.id().equals(this.id())){
+			if(actionId.id().equals(this.id())){
 				equality = true;
 			}
 		}
 		return equality;
-	}	
+	}
 
 }
